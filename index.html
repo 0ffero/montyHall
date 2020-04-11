@@ -1,0 +1,68 @@
+<html>
+<head>
+    <style type="text/css">
+        body { font-size: 18px; background-color: #191919; color: white; }
+        #container { margin: 0px; width: 100%; }
+        .result { font-family: monospace; font-size: 10px; float: left; padding: 2px; margin: 0px; width: 150px; border: 1px solid black; text-align: center; }
+        .red { background-color: #520000; }
+        .green { background-color: #004000; }
+
+        .button { width: 150px; padding: 6px; font-size: 20px; float: left; text-align: center; }
+    </style>
+</head>
+
+<body>
+<div id="container"></div>
+</body>
+
+<script type="text/javascript">
+cn = document.getElementById('container');
+lose = win = 0; opText='';
+tests = 1000;
+
+for (i=0; i<tests; i++) {
+    money = ~~(Math.random()*3);
+    guess = ~~(Math.random()*3);
+    // this is an ultra compact version of the actual test and moves that are done
+    if (guess==money) { lose++; opText='Lose :('; tCol='red';  } else { win++; opText='Win! :)'; tCol='green'; }
+    
+    cn.innerHTML+='<div class="result ' + tCol + '">Test: ' + (i+1) + ' - ' + opText + '</div>';
+    /*
+    switch (money) {
+        case 0: noMoneyArray = [1,2]; break;
+        case 1: noMoneyArray = [0,2]; break;
+        case 2: noMoneyArray = [0,1]; break;
+    }
+    
+    // this is completely unnecessary to do here instead of when we're generating the money door, but it just makes the code more obvious that money and guess are generated at different times (for pedants only :P)
+    guess = ~~(Math.random()*3);
+
+    if (guess==money) { // player guessed right! this should only happen 33.3% of the time -- we'll call this "luck"
+        rndDealerDoor = ~~(Math.random()*2);
+        dealerDoor = noMoneyArray.split([rndDealerDoor],1);
+    } else { // player seleced a bad door, open the other "bad" door
+        switch (guess) {
+            case 0: //finish if can be arsed!!!!!S
+        }
+    }
+    */
+}
+
+cn.innerHTML+='<div style="clear: both;">Wins: ' + win + ' - Losses: ' + lose + '</div>';
+cn.innerHTML+='<div class="button" onclick="show(\'red\')">RED</div><div class="button" onclick="show(\'green\')">GREEN</div>';
+
+function show(colour) {
+    if (colour=='green') {
+        selecteds = document.getElementsByClassName('green'); // he he he.. selecteds.. ha.. s'funny
+    } else {
+        selecteds = document.getElementsByClassName('red');
+    }
+    
+    if (selecteds[0].style.visibility=='hidden') { newValue = ''; } else { newValue = 'hidden'; }
+
+    for (i=0; i<selecteds.length; i++) {
+        selecteds[i].style.visibility = newValue;
+    }
+}
+</script>
+</html>
